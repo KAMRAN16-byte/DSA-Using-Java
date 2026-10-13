@@ -127,8 +127,7 @@ public class TailLinkedList {
     }
 
     public static void main(String[] args) {
-        TailLinkedList list = new TailLinkedList();
-
+        final TailLinkedList list = new TailLinkedList();
         list.addFirst(1);
         list.addFirst(2);
         list.addFirst(3);
