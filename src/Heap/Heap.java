@@ -30,7 +30,7 @@ public class Heap
         }
     }
 
-    int delete()
+    int deleteOld()
     {
         int toReturn = heap[0];
         heap[0] = heap[--SIZE];
@@ -38,19 +38,41 @@ public class Heap
         while ((root + 1) * 2 - 1 < SIZE)
         {
             int child_inx = (root + 1) * 2 - 1;
-            if(child_inx + 1 < SIZE && heap[child_inx + 1] > heap[child_inx])
+            if (child_inx + 1 < SIZE && heap[child_inx + 1] > heap[child_inx])
             {
                 child_inx = child_inx + 1;
             }
-            if(heap[child_inx] > heap[root])
+            if (heap[child_inx] > heap[root])
             {
                 int temp = heap[child_inx];
                 heap[child_inx] = heap[root];
                 heap[root] = temp;
                 root = child_inx;
+            } else
+                return toReturn;
+        }
+        return toReturn;
+    }
+
+    int delete()
+    {
+        int toReturn = heap[0];
+        heap[0] = heap[--SIZE];
+        int parent = 0;
+        for (int child_indx = ((parent * 2) + 1); child_indx < SIZE; child_indx = ((parent * 2) + 1))
+        {
+            if(child_indx + 1 < SIZE && heap[child_indx + 1] > heap[child_indx])
+                child_indx++;
+            if(heap[child_indx] > heap[parent])
+            {
+                int temp = heap[child_indx];
+                heap[child_indx] = heap[parent];
+                heap[parent] = temp;
+                parent = child_indx;
             }
             else
                 return toReturn;
+
         }
         return toReturn;
     }
